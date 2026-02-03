@@ -1,5 +1,7 @@
 <div align="center">
 
+[<img src="https://cloud.qmdeve.com/f/VRUn/icon.png" width="200" height="200"/>](https://blurview.qmdeve.com)
+
 ## QmBlurView
 **QmBlurView 是一个 `Android UI` 组件库，提供实时、动态的高斯模糊效果。它使用原生C++代码进行高效的模糊处理，并提供一组模糊UI组件来增强您的应用程序设计**
 
@@ -8,7 +10,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://GitHub.com/QmDeve/QmBlurView/)
 [![Publish New Version](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml/badge.svg)](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml)
 
-[![QQ](https://img.shields.io/badge/QQ%20群组-1046829337-blue.svg?logo=qq)](https://qm.qq.com/q/9O8Dzxch1u)
+[![QQ](https://img.shields.io/badge/QQ%20群组-1054049593-blue.svg?logo=qq)](https://qm.qq.com/q/NBHRYhce4y)
 [![Telegram](https://img.shields.io/badge/Telegram%20群组-QmDeve-blue.svg?logo=telegram)](https://t.me/QmDeve)
 
 [![License](https://img.shields.io/github/license/QmDeve/QmBlurView.svg?logo=github&color=blue&label=License)](https://github.com/QmDeve/QmBlurView/blob/master/LICENSE)
@@ -29,7 +31,6 @@
 ## 特性
 
 - **高性能**：使用 C/C++ 实现的原生模糊算法，确保最大的速度和流畅度。
-- **实时模糊**：随着背景内容的变化自动更新模糊效果。
 - **丰富的组件库**：包含多种模糊效果的组件。
 - **图片加载支持**：内置针对 **Glide** 和 **Picasso** 的变换支持。
 

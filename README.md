@@ -1,5 +1,7 @@
 <div align="center">
 
+[<img src="https://cloud.qmdeve.com/f/VRUn/icon.png" width="200" height="200"/>](https://blurview.qmdeve.com)
+
 ## QmBlurView
 **QmBlurView is an `Android UI` component library that provides real-time, dynamic Gaussian blur effects. It uses native C++ code for efficient blur processing and provides a set of blur UI components to enhance your application design**
 
@@ -9,6 +11,7 @@
 [![Publish New Version](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml/badge.svg)](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml)
 
 [![Telegram](https://img.shields.io/badge/Telegram%20Group-QmDeve-blue.svg?logo=telegram)](https://t.me/QmDeve)
+[![QQ](https://img.shields.io/badge/QQ%20Group-1054049593-blue.svg?logo=qq)](https://qm.qq.com/q/NBHRYhce4y)
 
 [![License](https://img.shields.io/github/license/QmDeve/QmBlurView.svg?logo=github&color=blue&label=License)](https://github.com/QmDeve/QmBlurView/blob/master/LICENSE)
 [![Android](https://img.shields.io/badge/Android-5.0%2B-brightgreen.svg)](https://developer.android.com)
@@ -24,7 +27,6 @@
 ## Features
 
 - **High Performance**: Native blur algorithm implemented in C/C++ for maximum speed and smoothness.
-- **Real-time Blurring**: Automatically updates the blur effect as the background content changes.
 - **Rich Component Library**: Component that includes multiple types of blur effects.
 - **Image Loading Support**: Built-in transformations for **Glide** and **Picasso**.
 
@@ -61,7 +63,7 @@ dependencies {
 
 Please refer to the documentation to learn how to use the library
 
-**Documentation；[https://blurview.qmdeve.com](https://blurview.qmdeve.com)**
+**Documentation: [https://blurview.qmdeve.com](https://blurview.qmdeve.com)**
 
 ## Star History
 
