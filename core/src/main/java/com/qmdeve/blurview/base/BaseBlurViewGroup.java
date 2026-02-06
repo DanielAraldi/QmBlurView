@@ -377,11 +377,25 @@ public class BaseBlurViewGroup {
                 } else {
                     throw e;
                 }
+            } catch (IndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                Log.w(Utils.TAG, "View hierarchy changed during blur operation: " + e.getMessage());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    mUsePixelCopyFallback = true;
+                    performPixelCopyBlur();
+                    return false;
+                }
+                return false;
             }
         } finally {
             mIsRendering = false;
             Utils.sIsGlobalCapturing = false;
-            mBlurringCanvas.restoreToCount(saveCount);
+            try {
+                if (mBlurringCanvas != null && saveCount >= 0) {
+                    mBlurringCanvas.restoreToCount(saveCount);
+                }
+            } catch (Exception e) {
+                Log.w(Utils.TAG, "error: " + e.getMessage());
+            }
         }
 
         blur(mBitmapToBlur, mBlurredBitmap);
