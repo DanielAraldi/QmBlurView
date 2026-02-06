@@ -377,6 +377,14 @@ public class BaseBlurViewGroup {
                 } else {
                     throw e;
                 }
+            } catch (IndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                Log.w(Utils.TAG, "View hierarchy changed during blur operation: " + e.getMessage());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    mUsePixelCopyFallback = true;
+                    performPixelCopyBlur();
+                    return false;
+                }
+                return false;
             }
         } finally {
             mIsRendering = false;
