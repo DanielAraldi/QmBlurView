@@ -10,9 +10,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://GitHub.com/QmDeve/QmBlurView/)
 [![Publish New Version](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml/badge.svg)](https://github.com/QmDeve/QmBlurView/actions/workflows/publish.yml)
 
-[![Telegram](https://img.shields.io/badge/Telegram%20Group-QmDeve-blue.svg?logo=telegram)](https://t.me/QmDeve)
-[![QQ](https://img.shields.io/badge/QQ%20Group-1054049593-blue.svg?logo=qq)](https://qm.qq.com/q/NBHRYhce4y)
-
 [![License](https://img.shields.io/github/license/QmDeve/QmBlurView.svg?logo=github&color=blue&label=License)](https://github.com/QmDeve/QmBlurView/blob/master/LICENSE)
 [![Android](https://img.shields.io/badge/Android-5.0%2B-brightgreen.svg)](https://developer.android.com)
 
@@ -34,11 +31,11 @@
 
 |                                BlurView                                |                              BlurButtonView                              |                                ProgressiveBlurView                                |
 |:----------------------------------------------------------------------:|:------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
-| <img src="https://cloud.qmdeve.com/f/eqsn/BlurView.jpeg" width="250"/> | <img src="https://cloud.qmdeve.com/f/YyT3/BlurButton.jpeg" width="250"/> | <img src="https://cloud.qmdeve.com/f/xYug/ProgressiveBlurView.jpeg" width="250"/> |
+| <img src="https://blurview.qmdeve.com/img/BlurView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurButton.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/ProgressiveBlurView.jpg" width="250"/> |
 
 |                                BlurTitleBarView                                |                                BlurSwitchButtonView                                 |                              BlurBottomNavigationView                              |
 |:------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
-| <img src="https://cloud.qmdeve.com/f/Rbhn/BlurTitlebarView.jpeg" width="250"/> | <img src="https://cloud.qmdeve.com/f/3Nfl/BlurSwitchButton_true.jpeg" width="250"/> | <img src="https://cloud.qmdeve.com/f/gecr/BlurBottomNavigation.jpeg" width="250"/> |
+| <img src="https://blurview.qmdeve.com/img/BlurTitlebarView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurSwitchButton_true.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurBottomNavigation.jpg" width="250"/> |
 
 ## Integration
 
@@ -74,6 +71,7 @@ Please refer to the documentation to learn how to use the library
 ## My Other Projects
 
 - **[AndroidLiquidGlassView](https://liquidglass.qmdeve.com)**
+- **[Personal Homepage](https://github.com/QmDeve/personal-homepage)**
 - **[Qm Authenticator for Android](https://github.com/Rouneant/Qm-Authenticator-for-Android)**
 
 ## License
