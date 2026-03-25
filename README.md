@@ -1,6 +1,6 @@
 <div align="center">
 
-[<img src="https://cloud.qmdeve.com/f/VRUn/icon.png" width="200" height="200"/>](https://blurview.qmdeve.com)
+[<img src="https://blurview.qmdeve.com/icon.jpg" width="200" height="200"/>](https://blurview.qmdeve.com)
 
 ## QmBlurView
 **QmBlurView is an `Android UI` component library that provides real-time, dynamic Gaussian blur effects. It uses native C++ code for efficient blur processing and provides a set of blur UI components to enhance your application design**
@@ -61,10 +61,6 @@ dependencies {
 Please refer to the documentation to learn how to use the library
 
 **Documentation: [https://blurview.qmdeve.com](https://blurview.qmdeve.com)**
-
-## Star History
-
-[![Star History](https://starchart.qmdeve.com/QmDeve/QmBlurView.svg?variant=adaptive)](https://starchart.qmdeve.com/QmDeve/QmBlurView)
 
 ---
 
