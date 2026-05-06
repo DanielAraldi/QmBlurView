@@ -375,7 +375,11 @@ public abstract class BaseBlurView extends View {
     }
 
     public void setCornerRadius(float radius) {
-        if (mCornerRadius != radius && radius >= 0) {
+        if (radius >= 0 && (mCornerRadius != radius
+                || mTopLeftCornerRadius != radius
+                || mTopRightCornerRadius != radius
+                || mBottomLeftCornerRadius != radius
+                || mBottomRightCornerRadius != radius)) {
             mCornerRadius = radius;
             mTopLeftCornerRadius = radius;
             mTopRightCornerRadius = radius;
