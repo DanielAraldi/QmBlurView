@@ -80,6 +80,12 @@ public class BlurView extends BaseBlurView {
         // Corner radius, default no rounding
         mCornerRadius = a.getDimension(R.styleable.BlurView_cornerRadius, 0);
 
+        // Inherit of corner radius
+        mTopLeftCornerRadius = a.getDimension(R.styleable.BlurView_topLeftCornerRadius, mCornerRadius);
+        mTopRightCornerRadius = a.getDimension(R.styleable.BlurView_topRightCornerRadius, mCornerRadius);
+        mBottomLeftCornerRadius = a.getDimension(R.styleable.BlurView_bottomLeftCornerRadius, mCornerRadius);
+        mBottomRightCornerRadius = a.getDimension(R.styleable.BlurView_bottomRightCornerRadius, mCornerRadius);
+
         // Downsample factor, default no downsampling
         mDownsampleFactor = a.getFloat(R.styleable.BlurView_downsampleFactor, 0f);
 

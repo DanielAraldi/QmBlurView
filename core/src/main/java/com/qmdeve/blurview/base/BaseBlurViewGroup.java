@@ -68,6 +68,10 @@ public class BaseBlurViewGroup {
     private Canvas mBlurringCanvas;
     private boolean mIsRendering;
     private float mCornerRadius;
+    private float mTopLeftCornerRadius = mCornerRadius;
+    private float mTopRightCornerRadius = mCornerRadius;
+    private float mBottomLeftCornerRadius = mCornerRadius;
+    private float mBottomRightCornerRadius = mCornerRadius;
     private final RectF mClipRect = new RectF();
     private final Path mG3Path = new Path();
     private View mDecorView;
@@ -103,6 +107,12 @@ public class BaseBlurViewGroup {
         );
         mOverlayColor = a.getColor(R.styleable.BlurView_overlayColor, 0xAAFFFFFF);
         mCornerRadius = a.getDimension(R.styleable.BlurView_cornerRadius, 0);
+
+        mTopLeftCornerRadius = a.getDimension(R.styleable.BlurView_topLeftCornerRadius, mCornerRadius);
+        mTopRightCornerRadius = a.getDimension(R.styleable.BlurView_topRightCornerRadius, mCornerRadius);
+        mBottomLeftCornerRadius = a.getDimension(R.styleable.BlurView_bottomLeftCornerRadius, mCornerRadius);
+        mBottomRightCornerRadius = a.getDimension(R.styleable.BlurView_bottomRightCornerRadius, mCornerRadius);
+
         mDownsampleFactor = a.getFloat(R.styleable.BlurView_downsampleFactor, 0f);
         a.recycle();
     }
@@ -169,6 +179,50 @@ public class BaseBlurViewGroup {
     public void setCornerRadius(float radius) {
         if (mCornerRadius != radius && radius >= 0) {
             mCornerRadius = radius;
+            mTopLeftCornerRadius = radius;
+            mTopRightCornerRadius = radius;
+            mBottomLeftCornerRadius = radius;
+            mBottomRightCornerRadius = radius;
+            mForceRedraw = true;
+            if (mHostView != null) {
+                mHostView.invalidate();
+            }
+        }
+    }
+
+    public void setTopLeftCornerRadius(float radius) {
+        if (mTopLeftCornerRadius != radius && radius >= 0) {
+            mTopLeftCornerRadius = radius;
+            mForceRedraw = true;
+            if (mHostView != null) {
+                mHostView.invalidate();
+            }
+        }
+    }
+
+    public void setTopRightCornerRadius(float radius) {
+        if (mTopRightCornerRadius != radius && radius >= 0) {
+            mTopRightCornerRadius = radius;
+            mForceRedraw = true;
+            if (mHostView != null) {
+                mHostView.invalidate();
+            }
+        }
+    }
+
+    public void setBottomLeftCornerRadius(float radius) {
+        if (mBottomLeftCornerRadius != radius && radius >= 0) {
+            mBottomLeftCornerRadius = radius;
+            mForceRedraw = true;
+            if (mHostView != null) {
+                mHostView.invalidate();
+            }
+        }
+    }
+
+    public void setBottomRightCornerRadius(float radius) {
+        if (mBottomRightCornerRadius != radius && radius >= 0) {
+            mBottomRightCornerRadius = radius;
             mForceRedraw = true;
             if (mHostView != null) {
                 mHostView.invalidate();
@@ -178,6 +232,22 @@ public class BaseBlurViewGroup {
 
     public float getCornerRadius() {
         return mCornerRadius;
+    }
+
+    public float getTopLeftCornerRadius() {
+        return mTopLeftCornerRadius;
+    }
+
+    public float getTopRightCornerRadius() {
+        return mTopRightCornerRadius;
+    }
+
+    public float getBottomLeftCornerRadius() {
+        return mBottomLeftCornerRadius;
+    }
+
+    public float getBottomRightCornerRadius() {
+        return mBottomRightCornerRadius;
     }
 
     public Bitmap getBlurredBitmap() {
@@ -461,6 +531,18 @@ public class BaseBlurViewGroup {
         return mIsRendering;
     }
 
+    private boolean hasCornerRadius() {
+        return mTopLeftCornerRadius > 0 || mTopRightCornerRadius > 0 ||
+                mBottomLeftCornerRadius > 0 || mBottomRightCornerRadius > 0;
+    }
+
+    private void updatePath(RectF rect) {
+        Utils.roundedRectPath(rect,
+                mTopLeftCornerRadius, mTopRightCornerRadius,
+                mBottomLeftCornerRadius, mBottomRightCornerRadius,
+                mG3Path);
+    }
+
     public void drawBlurredBitmap(Canvas canvas, int width, int height) {
         ensureBlurReady(width, height);
 
@@ -468,10 +550,10 @@ public class BaseBlurViewGroup {
             Rect srcRect = new Rect(0, 0, mBlurredBitmap.getWidth(), mBlurredBitmap.getHeight());
             Rect dstRect = new Rect(0, 0, width, height);
 
-            if (mCornerRadius > 0) {
+            if (hasCornerRadius()) {
                 canvas.save();
                 mClipRect.set(dstRect);
-                Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+                updatePath(mClipRect);
                 canvas.clipPath(mG3Path);
                 canvas.drawBitmap(mBlurredBitmap, srcRect, dstRect, null);
                 canvas.restore();
@@ -484,10 +566,10 @@ public class BaseBlurViewGroup {
         paint.setColor(mOverlayColor);
 
         Rect dstRect = new Rect(0, 0, width, height);
-        if (mCornerRadius > 0) {
+        if (hasCornerRadius()) {
             canvas.save();
             mClipRect.set(dstRect);
-            Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+            updatePath(mClipRect);
             canvas.clipPath(mG3Path);
             canvas.drawRect(dstRect, paint);
             canvas.restore();
@@ -503,9 +585,9 @@ public class BaseBlurViewGroup {
         previewPaint.setStyle(Paint.Style.FILL);
         int previewColor = mOverlayColor;
         previewPaint.setColor(previewColor);
-        if (mCornerRadius > 0) {
+        if (hasCornerRadius()) {
             mClipRect.set(0, 0, width, height);
-            Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+            updatePath(mClipRect);
             canvas.drawPath(mG3Path, previewPaint);
         } else {
             canvas.drawRect(0, 0, width, height, previewPaint);
@@ -514,7 +596,7 @@ public class BaseBlurViewGroup {
 
     public void clipCanvasWithRoundedCorner(Canvas canvas, int width, int height) {
         mClipRect.set(0, 0, width, height);
-        Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+        updatePath(mClipRect);
         canvas.clipPath(mG3Path);
     }
 

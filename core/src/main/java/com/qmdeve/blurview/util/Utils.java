@@ -92,34 +92,45 @@ public class Utils {
     }
 
     public static void roundedRectPath(RectF rect, float radius, Path path) {
+        roundedRectPath(rect, radius, radius, radius, radius, path);
+    }
+
+    public static void roundedRectPath(RectF rect, float topLeft, float topRight, float bottomLeft, float bottomRight, Path path) {
         path.reset();
 
-        if (radius <= 0) {
+        if (topLeft <= 0 && topRight <= 0 && bottomLeft <= 0 && bottomRight <= 0) {
             path.addRect(rect, Path.Direction.CW);
             return;
         }
 
         float maxRadius = Math.min(rect.width(), rect.height()) / 2f;
-        radius = Math.min(radius, maxRadius);
-        float controlOffset = radius * 0.5522847498f;
+        topLeft = Math.max(0, Math.min(topLeft, maxRadius));
+        topRight = Math.max(0, Math.min(topRight, maxRadius));
+        bottomLeft = Math.max(0, Math.min(bottomLeft, maxRadius));
+        bottomRight = Math.max(0, Math.min(bottomRight, maxRadius));
 
-        path.moveTo(rect.left + radius, rect.top);
-        path.lineTo(rect.right - radius, rect.top);
-        path.cubicTo(rect.right - radius + controlOffset, rect.top,
-                rect.right, rect.top + radius - controlOffset,
-                rect.right, rect.top + radius);
-        path.lineTo(rect.right, rect.bottom - radius);
-        path.cubicTo(rect.right, rect.bottom - radius + controlOffset,
-                rect.right - radius + controlOffset, rect.bottom,
-                rect.right - radius, rect.bottom);
-        path.lineTo(rect.left + radius, rect.bottom);
-        path.cubicTo(rect.left + radius - controlOffset, rect.bottom,
-                rect.left, rect.bottom - radius + controlOffset,
-                rect.left, rect.bottom - radius);
-        path.lineTo(rect.left, rect.top + radius);
-        path.cubicTo(rect.left, rect.top + radius - controlOffset,
-                rect.left + radius - controlOffset, rect.top,
-                rect.left + radius, rect.top);
+        float tlOffset = topLeft * 0.5522847498f;
+        float trOffset = topRight * 0.5522847498f;
+        float brOffset = bottomRight * 0.5522847498f;
+        float blOffset = bottomLeft * 0.5522847498f;
+
+        path.moveTo(rect.left + topLeft, rect.top);
+        path.lineTo(rect.right - topRight, rect.top);
+        path.cubicTo(rect.right - topRight + trOffset, rect.top,
+                rect.right, rect.top + topRight - trOffset,
+                rect.right, rect.top + topRight);
+        path.lineTo(rect.right, rect.bottom - bottomRight);
+        path.cubicTo(rect.right, rect.bottom - bottomRight + brOffset,
+                rect.right - bottomRight + brOffset, rect.bottom,
+                rect.right - bottomRight, rect.bottom);
+        path.lineTo(rect.left + bottomLeft, rect.bottom);
+        path.cubicTo(rect.left + bottomLeft - blOffset, rect.bottom,
+                rect.left, rect.bottom - bottomLeft + blOffset,
+                rect.left, rect.bottom - bottomLeft);
+        path.lineTo(rect.left, rect.top + topLeft);
+        path.cubicTo(rect.left, rect.top + topLeft - tlOffset,
+                rect.left + topLeft - tlOffset, rect.top,
+                rect.left + topLeft, rect.top);
         path.close();
     }
 
