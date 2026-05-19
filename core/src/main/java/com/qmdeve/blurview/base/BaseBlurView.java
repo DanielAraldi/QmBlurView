@@ -85,6 +85,10 @@ public abstract class BaseBlurView extends View {
     public boolean mDifferentRoot;
     protected boolean mIsRendering;
     public float mCornerRadius;
+    public float mTopLeftCornerRadius;
+    public float mTopRightCornerRadius;
+    public float mBottomLeftCornerRadius;
+    public float mBottomRightCornerRadius;
     public final RectF mClipRect = new RectF();
     public final Path mG3Path = new Path();
 
@@ -371,11 +375,67 @@ public abstract class BaseBlurView extends View {
     }
 
     public void setCornerRadius(float radius) {
-        if (mCornerRadius != radius && radius >= 0) {
+        if (radius >= 0 && (mCornerRadius != radius
+                || mTopLeftCornerRadius != radius
+                || mTopRightCornerRadius != radius
+                || mBottomLeftCornerRadius != radius
+                || mBottomRightCornerRadius != radius)) {
             mCornerRadius = radius;
+            mTopLeftCornerRadius = radius;
+            mTopRightCornerRadius = radius;
+            mBottomLeftCornerRadius = radius;
+            mBottomRightCornerRadius = radius;
             mForceRedraw = true;
             invalidate();
         }
+    }
+
+    public void setTopLeftCornerRadius(float radius) {
+        if (mTopLeftCornerRadius != radius && radius >= 0) {
+            mTopLeftCornerRadius = radius;
+            mForceRedraw = true;
+            invalidate();
+        }
+    }
+
+    public void setTopRightCornerRadius(float radius) {
+        if (mTopRightCornerRadius != radius && radius >= 0) {
+            mTopRightCornerRadius = radius;
+            mForceRedraw = true;
+            invalidate();
+        }
+    }
+
+    public void setBottomLeftCornerRadius(float radius) {
+        if (mBottomLeftCornerRadius != radius && radius >= 0) {
+            mBottomLeftCornerRadius = radius;
+            mForceRedraw = true;
+            invalidate();
+        }
+    }
+
+    public void setBottomRightCornerRadius(float radius) {
+        if (mBottomRightCornerRadius != radius && radius >= 0) {
+            mBottomRightCornerRadius = radius;
+            mForceRedraw = true;
+            invalidate();
+        }
+    }
+
+    public float getTopLeftCornerRadius() {
+        return mTopLeftCornerRadius;
+    }
+
+    public float getTopRightCornerRadius() {
+        return mTopRightCornerRadius;
+    }
+
+    public float getBottomLeftCornerRadius() {
+        return mBottomLeftCornerRadius;
+    }
+
+    public float getBottomRightCornerRadius() {
+        return mBottomRightCornerRadius;
     }
 
     public float getCornerRadius() {
@@ -675,6 +735,18 @@ public abstract class BaseBlurView extends View {
         drawBlurredBitmap(canvas);
     }
 
+    private boolean hasCornerRadius() {
+        return mTopLeftCornerRadius > 0 || mTopRightCornerRadius > 0 ||
+                mBottomLeftCornerRadius > 0 || mBottomRightCornerRadius > 0;
+    }
+
+    private void updatePath(RectF rect) {
+        Utils.roundedRectPath(rect,
+                mTopLeftCornerRadius, mTopRightCornerRadius,
+                mBottomLeftCornerRadius, mBottomRightCornerRadius,
+                mG3Path);
+    }
+
     public void drawBlurredBitmap(Canvas canvas) {
         if (Utils.sIsGlobalCapturing && !mIsRendering) {
             return;
@@ -683,10 +755,10 @@ public abstract class BaseBlurView extends View {
             mRectSrc.set(0, 0, mBlurredBitmap.getWidth(), mBlurredBitmap.getHeight());
             mRectDst.set(0, 0, getWidth(), getHeight());
 
-            if (mCornerRadius > 0) {
+            if (hasCornerRadius()) {
                 canvas.save();
                 mClipRect.set(mRectDst);
-                Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+                updatePath(mClipRect);
                 canvas.clipPath(mG3Path);
                 canvas.drawBitmap(mBlurredBitmap, mRectSrc, mRectDst, null);
                 canvas.restore();
@@ -697,10 +769,10 @@ public abstract class BaseBlurView extends View {
 
         mPaint.setColor(mOverlayColor);
 
-        if (mCornerRadius > 0) {
+        if (hasCornerRadius()) {
             canvas.save();
             mClipRect.set(mRectDst);
-            Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+            updatePath(mClipRect);
             canvas.clipPath(mG3Path);
             canvas.drawRect(mRectDst, mPaint);
             canvas.restore();
@@ -716,9 +788,9 @@ public abstract class BaseBlurView extends View {
         previewPaint.setStyle(Paint.Style.FILL);
         int previewColor = mOverlayColor;
         previewPaint.setColor(previewColor);
-        if (mCornerRadius > 0) {
+        if (hasCornerRadius()) {
             mClipRect.set(0, 0, getWidth(), getHeight());
-            Utils.roundedRectPath(mClipRect, mCornerRadius, mG3Path);
+            updatePath(mClipRect);
             canvas.drawPath(mG3Path, previewPaint);
         } else {
             canvas.drawRect(0, 0, getWidth(), getHeight(), previewPaint);

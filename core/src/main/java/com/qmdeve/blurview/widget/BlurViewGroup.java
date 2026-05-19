@@ -95,6 +95,38 @@ public class BlurViewGroup extends ViewGroup {
         mBaseBlurViewGroup.setCornerRadius(radius);
     }
 
+    public void setTopLeftCornerRadius(float radius) {
+        mBaseBlurViewGroup.setTopLeftCornerRadius(radius);
+    }
+
+    public void setTopRightCornerRadius(float radius) {
+        mBaseBlurViewGroup.setTopRightCornerRadius(radius);
+    }
+
+    public void setBottomLeftCornerRadius(float radius) {
+        mBaseBlurViewGroup.setBottomLeftCornerRadius(radius);
+    }
+
+    public void setBottomRightCornerRadius(float radius) {
+        mBaseBlurViewGroup.setBottomRightCornerRadius(radius);
+    }
+
+    public float getTopLeftCornerRadius() {
+        return mBaseBlurViewGroup.getTopLeftCornerRadius();
+    }
+
+    public float getTopRightCornerRadius() {
+        return mBaseBlurViewGroup.getTopRightCornerRadius();
+    }
+
+    public float getBottomLeftCornerRadius() {
+        return mBaseBlurViewGroup.getBottomLeftCornerRadius();
+    }
+
+    public float getBottomRightCornerRadius() {
+        return mBaseBlurViewGroup.getBottomRightCornerRadius();
+    }
+
     public Bitmap getBlurredBitmap() {
         return mBaseBlurViewGroup.getBlurredBitmap();
     }
@@ -134,7 +166,10 @@ public class BlurViewGroup extends ViewGroup {
             mBaseBlurViewGroup.drawPreviewBackground(canvas, getWidth(), getHeight());
         }
 
-        if (mBaseBlurViewGroup.getCornerRadius() > 0) {
+        if (mBaseBlurViewGroup.getTopLeftCornerRadius() > 0 ||
+            mBaseBlurViewGroup.getTopRightCornerRadius() > 0 ||
+            mBaseBlurViewGroup.getBottomLeftCornerRadius() > 0 ||
+            mBaseBlurViewGroup.getBottomRightCornerRadius() > 0) {
             canvas.save();
             mBaseBlurViewGroup.clipCanvasWithRoundedCorner(canvas, getWidth(), getHeight());
             super.dispatchDraw(canvas);
