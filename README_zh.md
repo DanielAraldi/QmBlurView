@@ -50,13 +50,13 @@
 ```gradle
 dependencies {
     // 核心库（必需）
-    implementation 'com.qmdeve.blurview:core:1.1.4'
+    implementation 'com.qmdeve.blurview:core:1.1.5'
 
     // 导航支持（可选）
-    implementation 'com.qmdeve.blurview:navigation:1.1.4'
+    implementation 'com.qmdeve.blurview:navigation:1.1.5'
 
     // 图片加载变换（可选 - Glide/Picasso）
-    implementation 'com.qmdeve.blurview:transform:1.1.4'
+    implementation 'com.qmdeve.blurview:transform:1.1.5'
 }
 ```
 
