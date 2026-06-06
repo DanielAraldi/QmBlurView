@@ -65,6 +65,15 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
     private final Path mClipPath = new Path();
     private final Paint mBlendPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint mOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private LinearGradient mCachedIntensityGradient;
+    private LinearGradient mCachedOverlayGradient;
+    private int mCachedIntensityWidth = -1;
+    private int mCachedIntensityHeight = -1;
+    private int mCachedIntensityDirection = -1;
+    private int mCachedOverlayWidth = -1;
+    private int mCachedOverlayHeight = -1;
+    private int mCachedOverlayDirection = -1;
+    private int mCachedOverlayColor = 0;
     private int mGradientDirection = DIRECTION_TOP_TO_BOTTOM;
     private int mOverlayColor = 0xAAFFFFFF;
     private float mBlurRadius = 25f;
@@ -113,8 +122,15 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
 
         if (mGradientDirection != direction) {
             mGradientDirection = direction;
+            invalidateGradientCache();
             invalidate();
         }
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        invalidateGradientCache();
     }
 
     @Override
@@ -162,28 +178,52 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
     }
 
     private LinearGradient createIntensityGradient(int width, int height) {
+        if (mCachedIntensityGradient != null
+                && mCachedIntensityWidth == width
+                && mCachedIntensityHeight == height
+                && mCachedIntensityDirection == mGradientDirection) {
+            return mCachedIntensityGradient;
+        }
+
         int[] colors = new int[]{Color.argb(0, 0, 0, 0), Color.argb(255, 0, 0, 0)};
         float[] positions = new float[]{0f, 1f};
 
         switch (mGradientDirection) {
             case DIRECTION_BOTTOM_TO_TOP:
-                return new LinearGradient(0, height, 0, 0, colors, positions, Shader.TileMode.CLAMP);
+                mCachedIntensityGradient = new LinearGradient(0, height, 0, 0, colors, positions, Shader.TileMode.CLAMP);
+                break;
             case DIRECTION_LEFT_TO_RIGHT:
-                return new LinearGradient(0, 0, width, 0, colors, positions, Shader.TileMode.CLAMP);
+                mCachedIntensityGradient = new LinearGradient(0, 0, width, 0, colors, positions, Shader.TileMode.CLAMP);
+                break;
             case DIRECTION_RIGHT_TO_LEFT:
-                return new LinearGradient(width, 0, 0, 0, colors, positions, Shader.TileMode.CLAMP);
+                mCachedIntensityGradient = new LinearGradient(width, 0, 0, 0, colors, positions, Shader.TileMode.CLAMP);
+                break;
             default:
-                return new LinearGradient(0, 0, 0, height, colors, positions, Shader.TileMode.CLAMP);
+                mCachedIntensityGradient = new LinearGradient(0, 0, 0, height, colors, positions, Shader.TileMode.CLAMP);
+                break;
         }
+
+        mCachedIntensityWidth = width;
+        mCachedIntensityHeight = height;
+        mCachedIntensityDirection = mGradientDirection;
+        return mCachedIntensityGradient;
     }
 
     private LinearGradient createOverlayGradient(int width, int height) {
+        if (mCachedOverlayGradient != null
+                && mCachedOverlayWidth == width
+                && mCachedOverlayHeight == height
+                && mCachedOverlayDirection == mGradientDirection
+                && mCachedOverlayColor == mOverlayColor) {
+            return mCachedOverlayGradient;
+        }
+
         int transparentColor = mOverlayColor & 0x00FFFFFF;
         int solidColor = mOverlayColor;
 
         switch (mGradientDirection) {
             case DIRECTION_BOTTOM_TO_TOP:
-                return new LinearGradient(
+                mCachedOverlayGradient = new LinearGradient(
                         0,
                         height,
                         0,
@@ -192,8 +232,9 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
                         new float[]{0f, 1f},
                         Shader.TileMode.CLAMP
                 );
+                break;
             case DIRECTION_LEFT_TO_RIGHT:
-                return new LinearGradient(
+                mCachedOverlayGradient = new LinearGradient(
                         0,
                         0,
                         width,
@@ -202,8 +243,9 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
                         new float[]{0f, 1f},
                         Shader.TileMode.CLAMP
                 );
+                break;
             case DIRECTION_RIGHT_TO_LEFT:
-                return new LinearGradient(
+                mCachedOverlayGradient = new LinearGradient(
                         width,
                         0,
                         0,
@@ -212,8 +254,9 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
                         new float[]{0f, 1f},
                         Shader.TileMode.CLAMP
                 );
+                break;
             default:
-                return new LinearGradient(
+                mCachedOverlayGradient = new LinearGradient(
                         0,
                         0,
                         0,
@@ -222,13 +265,24 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
                         new float[]{0f, 1f},
                         Shader.TileMode.CLAMP
                 );
+                break;
         }
+
+        mCachedOverlayWidth = width;
+        mCachedOverlayHeight = height;
+        mCachedOverlayDirection = mGradientDirection;
+        mCachedOverlayColor = mOverlayColor;
+        return mCachedOverlayGradient;
     }
 
     private void drawPreviewProgressiveBackground(Canvas canvas, int width, int height) {
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setShader(createOverlayGradient(width, height));
-        canvas.drawRect(0, 0, width, height, paint);
+        mOverlayPaint.setShader(createOverlayGradient(width, height));
+        canvas.drawRect(0, 0, width, height, mOverlayPaint);
+    }
+
+    private void invalidateGradientCache() {
+        mCachedIntensityGradient = null;
+        mCachedOverlayGradient = null;
     }
 
     private boolean hasAnyCornerRadius() {
@@ -240,6 +294,7 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
 
     private void clipCanvasWithRoundedCorners(Canvas canvas, int width, int height) {
         mClipRect.set(0, 0, width, height);
+        mClipPath.reset();
         Utils.roundedRectPath(
                 mClipRect,
                 getTopLeftCornerRadius(),
@@ -260,6 +315,7 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
     public void setOverlayColor(int color) {
         if (mOverlayColor != color) {
             mOverlayColor = color;
+            mCachedOverlayGradient = null;
             invalidate();
         }
     }
@@ -274,6 +330,7 @@ public class ProgressiveBlurViewGroup extends BlurViewGroup {
 
         if (mOverlayColor != color) {
             mOverlayColor = color;
+            mCachedOverlayGradient = null;
             invalidate();
         }
     }
