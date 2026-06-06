@@ -3,6 +3,7 @@
 [<img src="https://blurview.qmdeve.com/icon.jpg" width="200" height="200"/>](https://blurview.qmdeve.com)
 
 ## QmBlurView
+
 **QmBlurView is an `Android UI` component library that provides real-time, dynamic Gaussian blur effects. It uses native C++ code for efficient blur processing and provides a set of blur UI components to enhance your application design**
 
 <br>
@@ -29,12 +30,12 @@
 
 ## Preview
 
-|                                BlurView                                |                              BlurButtonView                              |                                ProgressiveBlurView                                |
-|:----------------------------------------------------------------------:|:------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
+|                               BlurView                                |                             BlurButtonView                              |                               ProgressiveBlurView                                |
+| :-------------------------------------------------------------------: | :---------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img src="https://blurview.qmdeve.com/img/BlurView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurButton.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/ProgressiveBlurView.jpg" width="250"/> |
 
-|                                BlurTitleBarView                                |                                BlurSwitchButtonView                                 |                              BlurBottomNavigationView                              |
-|:------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
+|                               BlurTitleBarView                                |                                BlurSwitchButtonView                                |                             BlurBottomNavigationView                              |
+| :---------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: |
 | <img src="https://blurview.qmdeve.com/img/BlurTitlebarView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurSwitchButton_true.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurBottomNavigation.jpg" width="250"/> |
 
 ## Integration
@@ -46,13 +47,13 @@ Add the dependencies to your module's `build.gradle` file:
 ```gradle
 dependencies {
     // Core Library (Required)
-    implementation 'com.qmdeve.blurview:core:1.1.5'
+    implementation 'com.qmdeve.blurview:core:1.2.0'
 
     // Navigation Support (Optional)
-    implementation 'com.qmdeve.blurview:navigation:1.1.5'
+    implementation 'com.qmdeve.blurview:navigation:1.2.0'
 
     // Image Loading Transformations (Optional - Glide/Picasso)
-    implementation 'com.qmdeve.blurview:transform:1.1.5'
+    implementation 'com.qmdeve.blurview:transform:1.2.0'
 }
 ```
 
