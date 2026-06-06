@@ -45,7 +45,6 @@
             android:layout_alignParentTop="true"
             app:progressiveBlurRadius="20dp"
             app:progressiveDirection="topToBottom"
-            app:progressiveLayers="5"
             app:progressiveOverlayColor="#80FFFFFF">
 
         <TextView
@@ -69,6 +68,5 @@
             android:layout_alignParentBottom="true"
             app:blurRadius="20dp"
             app:progressiveDirection="bottomToTop"
-            app:progressiveLayers="5"
             app:progressiveOverlayColor="#80FFFFFF"/>
 </RelativeLayout>
