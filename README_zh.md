@@ -3,6 +3,7 @@
 [<img src="https://blurview.qmdeve.com/icon.jpg" width="200" height="200"/>](https://blurview.qmdeve.com)
 
 ## QmBlurView
+
 **QmBlurView 是一个 `Android UI` 组件库，提供实时、动态的高斯模糊效果。它使用原生C++代码进行高效的模糊处理，并提供一组模糊UI组件来增强您的应用程序设计**
 
 <br>
@@ -33,12 +34,12 @@
 
 ## 预览
 
-|                                BlurView                                |                              BlurButtonView                              |                                ProgressiveBlurView                                |
-|:----------------------------------------------------------------------:|:------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
+|                               BlurView                                |                             BlurButtonView                              |                               ProgressiveBlurView                                |
+| :-------------------------------------------------------------------: | :---------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img src="https://blurview.qmdeve.com/img/BlurView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurButton.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/ProgressiveBlurView.jpg" width="250"/> |
 
-|                                BlurTitleBarView                                |                                BlurSwitchButtonView                                 |                              BlurBottomNavigationView                              |
-|:------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
+|                               BlurTitleBarView                                |                                BlurSwitchButtonView                                |                             BlurBottomNavigationView                              |
+| :---------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: |
 | <img src="https://blurview.qmdeve.com/img/BlurTitlebarView.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurSwitchButton_true.jpg" width="250"/> | <img src="https://blurview.qmdeve.com/img/BlurBottomNavigation.jpg" width="250"/> |
 
 ## 集成
@@ -50,13 +51,13 @@
 ```gradle
 dependencies {
     // 核心库（必需）
-    implementation 'com.qmdeve.blurview:core:1.1.5'
+    implementation 'com.qmdeve.blurview:core:1.2.0'
 
     // 导航支持（可选）
-    implementation 'com.qmdeve.blurview:navigation:1.1.5'
+    implementation 'com.qmdeve.blurview:navigation:1.2.0'
 
     // 图片加载变换（可选 - Glide/Picasso）
-    implementation 'com.qmdeve.blurview:transform:1.1.5'
+    implementation 'com.qmdeve.blurview:transform:1.2.0'
 }
 ```
 

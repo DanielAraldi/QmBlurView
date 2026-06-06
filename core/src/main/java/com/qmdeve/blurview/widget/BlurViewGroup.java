@@ -160,12 +160,19 @@ public class BlurViewGroup extends ViewGroup {
     protected void dispatchDraw(@NonNull Canvas canvas) {
         boolean shouldDrawBlur = !Utils.sIsGlobalCapturing || mBaseBlurViewGroup.isRendering();
 
-        if (!isInEditMode() && shouldDrawBlur) {
-            mBaseBlurViewGroup.drawBlurredBitmap(canvas, getWidth(), getHeight());
-        } else if (isInEditMode()) {
-            mBaseBlurViewGroup.drawPreviewBackground(canvas, getWidth(), getHeight());
-        }
+        drawBlurLayer(canvas, getWidth(), getHeight(), isInEditMode(), shouldDrawBlur);
+        drawChildrenWithClip(canvas);
+    }
 
+    protected void drawBlurLayer(@NonNull Canvas canvas, int width, int height, boolean isEditMode, boolean shouldDrawBlur) {
+        if (!isEditMode && shouldDrawBlur) {
+            mBaseBlurViewGroup.drawBlurredBitmap(canvas, width, height);
+        } else if (isEditMode) {
+            mBaseBlurViewGroup.drawPreviewBackground(canvas, width, height);
+        }
+    }
+
+    protected void drawChildrenWithClip(@NonNull Canvas canvas) {
         if (mBaseBlurViewGroup.getTopLeftCornerRadius() > 0 ||
             mBaseBlurViewGroup.getTopRightCornerRadius() > 0 ||
             mBaseBlurViewGroup.getBottomLeftCornerRadius() > 0 ||

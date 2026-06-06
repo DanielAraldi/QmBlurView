@@ -143,6 +143,13 @@ ext.coreMavenConfig = { projectInstance ->
                     email = 'ahmedclubust@gmail.com'
                     organizationUrl = 'https://github.com/sbaiahmed1'
                 }
+
+                developer {
+                    id = 'DanielAraldi'
+                    name = 'Daniel Sansão Araldi'
+                    email = 'danielsaraldi@gmail.com'
+                    organizationUrl = 'https://github.com/DanielAraldi'
+                }
             }
 
             scm {
@@ -200,6 +207,13 @@ ext.navMavenConfig = { projectInstance ->
                     email = 'ahmedclubust@gmail.com'
                     organizationUrl = 'https://github.com/sbaiahmed1'
                 }
+
+                developer {
+                    id = 'DanielAraldi'
+                    name = 'Daniel Sansão Araldi'
+                    email = 'danielsaraldi@gmail.com'
+                    organizationUrl = 'https://github.com/DanielAraldi'
+                }
             }
 
             scm {
@@ -256,6 +270,13 @@ ext.tranMavenConfig = { projectInstance ->
                     name = 'Ahmed Sbai'
                     email = 'ahmedclubust@gmail.com'
                     organizationUrl = 'https://github.com/sbaiahmed1'
+                }
+
+                developer {
+                    id = 'DanielAraldi'
+                    name = 'Daniel Sansão Araldi'
+                    email = 'danielsaraldi@gmail.com'
+                    organizationUrl = 'https://github.com/DanielAraldi'
                 }
             }
 
