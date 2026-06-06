@@ -39,14 +39,29 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.qmdeve.blurview.widget.ProgressiveBlurView
+    <com.qmdeve.blurview.widget.ProgressiveBlurViewGroup
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
-            app:blurRadius="20dp"
+            app:progressiveBlurRadius="20dp"
             app:progressiveDirection="topToBottom"
             app:progressiveLayers="5"
-            app:progressiveOverlayColor="#80FFFFFF"/>
+            app:progressiveOverlayColor="#80FFFFFF">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:text="Progressive with TextView"
+                android:textColor="#FF1A1A1A"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+    </com.qmdeve.blurview.widget.ProgressiveBlurViewGroup>
 
     <com.qmdeve.blurview.widget.ProgressiveBlurView
             android:layout_width="match_parent"
